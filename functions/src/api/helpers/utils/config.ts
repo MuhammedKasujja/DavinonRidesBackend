@@ -8,7 +8,7 @@ require("firebase/auth");
 // admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 admin.initializeApp()
 
-const firebaseConfig = {
+const config = {
     apiKey: "AIzaSyB9ovqOW4giP8fdohQzBc9A225OYBh-Snw",
     authDomain: "davinonrides.firebaseapp.com",
     databaseURL: "https://davinonrides-default-rtdb.firebaseio.com",
@@ -19,12 +19,12 @@ const firebaseConfig = {
     measurementId: "G-E2QX4PM2ZX"
 }
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(config);
 
 const auth = firebase.auth()
 const db = admin.firestore()
 const firestore = admin.firestore;
 
 export  {
-    db, admin, auth, firestore, functions
+    db, admin, auth, firestore, functions, config
 }

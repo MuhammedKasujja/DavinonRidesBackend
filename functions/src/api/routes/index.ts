@@ -20,7 +20,7 @@ import {
 } from "../helpers/utils/CollectionTypes";
 import { FBAuth } from '../helpers/utils/auth_middleware';
 import { markTripNotificationsAsRead, streamTripNotifications } from '../helpers/trips';
-
+import { uploadImage } from '../helpers/utils/fileUpload'
 
 router.post('/signup', createUser)
 router.post('/login', login)
@@ -47,13 +47,7 @@ router.get('/trips', (req, res) => {
 });
 
 router.get('/drivers', function (_req, res, next) {
-
-  // var firebaseData = {};
-  // repo.fetchData(COLLECTION_DRIVERS)
-
   Promise.all([repo.joinsCollectionsHandler()]).then(function (results) {
-    // firebaseData.members = results[0];
-    //console.log(firebaseData);
     console.log("Drivers:" + results[0].length)
     res.json({ drivers: results[0] });
   });
@@ -82,10 +76,7 @@ router.post('/settings/edit/', function (req, res, next) {
 });
 
 router.get('/drivers/stations', function (req, res, next) {
-  // var firebaseData = {};
   Promise.all([repo.fetchData(COLLECTION_STATIONS),]).then(function (results) {
-    // firebaseData.members = results[0];
-    //console.log(firebaseData); 
     console.log("Stations:" + results[0].length)
     res.json({ stations: results[0] });
   });
@@ -318,6 +309,10 @@ router.post('/config/saveSettings', function (req, res, next) {
 
   res.status(200).json({ success: true })
 
+});
+
+router.post('/uploadImage',  (req, res, next)=> {
+  uploadImage(req, res)
 });
 
 
